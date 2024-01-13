@@ -14,8 +14,8 @@ def combine_dicts(dict1, dict2):
             
     return combined_dict
 
-dict1 = {'a': 1, 'b': 2, 'c': 3}
-dict2 = {'a': 4, 'b': 5, 'd': 6}
+kilefructecumparateluni = {'mere': 1, 'pere': 2, 'bananer': 3}
+kilefructecumparatevineri = {'mere': 4, 'pere': 5}
 
-combined_dict = combine_dicts(dict1, dict2)
+combined_dict = combine_dicts(kilefructecumparateluni, kilefructecumparatevineri)
 print(combined_dict)
