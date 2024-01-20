@@ -33,7 +33,7 @@ id_entry.grid(row=0,column=4)
 
 
 
-# Courses
+# Coursesc
 course_ids_label = tk.Label(top, text='Course ID')
 course_ids_label.grid(row=1, column=0)
 
