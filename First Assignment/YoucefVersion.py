@@ -14,19 +14,23 @@ def simulate_temperature_sensor(): # Simulate a temperature sensor
     temperature = random.uniform(-10, 40)
     sensor_data["Temperature"].append(temperature)
     return temperature
+
 def simulate_humidity_sensor(): # Simulate a humidity sensor
     humidity = random.uniform(0, 100)
     sensor_data["Humidity"].append(humidity)
     return humidity
+
 def simulate_pressure_sensor(): # Simulate a pressure sensor
     pressure = random.uniform(90000, 110000)
     sensor_data["Pressure"].append(pressure)
     return pressure
+
 def calculate_average(sensor_type): # Calculate the average of a sensor's historical data
     historical_values = historical_data.get(sensor_type, [])
     if historical_values:
         return sum(historical_values) / len(historical_values)
     return None
+
 def generate_weather_forecast(): # Generate a weather forecast
     avg_temp = calculate_average("Temperature")
     avg_humidity = calculate_average("Humidity")
@@ -40,6 +44,7 @@ def generate_weather_forecast(): # Generate a weather forecast
         else:
             forecast += "The weather conditions are normal."
         print(forecast)
+
 
 for _ in range(365):
     simulate_temperature_sensor()
