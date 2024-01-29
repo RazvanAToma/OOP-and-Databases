@@ -1,6 +1,8 @@
 
 class Book:
-        
+    
+    title = "Man and the sea"
+
     def __init__(self, title, author, price):
         self.title = title
         self.author = author
@@ -12,6 +14,6 @@ class Book:
         print(f"Price: ${self.price}")
 
 
-book_instance = Book("Interstellar", "Christopher Nolan", 59)
+book_instance = Book(Book.title, "Christopher Nolan", 59)
 
 book_instance.view()
