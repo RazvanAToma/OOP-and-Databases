@@ -1,15 +1,17 @@
 
-class Book():
+class Book:
         
-    def __init__(self):
-        pass
+    def __init__(self, title, author, price):
+        self.title = title
+        self.author = author
+        self.price = price
 
-    def view(self, title, author, price):
-        print(f"Title: {title}")
-        print(f"Author: {author}")
-        print(f"Price: ${price}")
+    def view(self):
+        print(f"Title: {self.title}")
+        print(f"Author: {self.author}")
+        print(f"Price: ${self.price}")
 
 
-book_instance = Book()
+book_instance = Book("Interstellar", "Christopher Nolan", 59)
 
-print(book_instance.view("Interstellar", "Christopher Nolan", 59))
+book_instance.view()
