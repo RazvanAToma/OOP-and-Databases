@@ -1,39 +1,42 @@
 import random
 
-class WeatherSensor:
-    def __init__(self, sensor_type, historical_data):
-        self.sensor_type = sensor_type
-        self.sensor_data = []
-        self.historical_data = historical_data
+class WeatherSimulator:
+    def __init__(self):
+        self.sensor_data = {
+            "Temperature": [],
+            "Humidity": [],
+            "Pressure": []
+        }
+        self.historical_data = {
+            "Temperature": [random.uniform(-10, 40) for _ in range(365)],
+            "Humidity": [random.uniform(0, 100) for _ in range(365)],
+            "Pressure": [random.uniform(90000, 110000) for _ in range(365)]
+        }
 
-    def simulate_sensor_reading(self):
-        reading = random.uniform(*self.historical_data["range"])
-        self.sensor_data.append(reading)
-        return reading
+    def simulate_sensor(self, sensor_type, min_value, max_value):
+        sensor_value = random.uniform(min_value, max_value)
+        self.sensor_data[sensor_type].append(sensor_value)
+        return sensor_value
 
-    def calculate_average(self):
-        historical_values = self.historical_data["data"]
+    def simulate_temperature_sensor(self):
+        return self.simulate_sensor("Temperature", -10, 40)
+
+    def simulate_humidity_sensor(self):
+        return self.simulate_sensor("Humidity", 0, 100)
+
+    def simulate_pressure_sensor(self):
+        return self.simulate_sensor("Pressure", 90000, 110000)
+
+    def calculate_average(self, sensor_type):
+        historical_values = self.historical_data.get(sensor_type, [])
         if historical_values:
             return sum(historical_values) / len(historical_values)
         return None
 
-class WeatherSimulator:
-    def __init__(self):
-        self.sensors = {
-            "Temperature": WeatherSensor("Temperature", {"range": (-10, 40), "data": []}),
-            "Humidity": WeatherSensor("Humidity", {"range": (0, 100), "data": []}),
-            "Pressure": WeatherSensor("Pressure", {"range": (90000, 110000), "data": []}),
-        }
-
-    def simulate_weather_data(self, days=365):
-        for _ in range(days):
-            for sensor_type, sensor in self.sensors.items():
-                sensor.simulate_sensor_reading()
-
     def generate_weather_forecast(self):
-        avg_temp = self.sensors["Temperature"].calculate_average()
-        avg_humidity = self.sensors["Humidity"].calculate_average()
-        avg_pressure = self.sensors["Pressure"].calculate_average()
+        avg_temp = self.calculate_average("Temperature")
+        avg_humidity = self.calculate_average("Humidity")
+        avg_pressure = self.calculate_average("Pressure")
 
         if avg_temp is not None and avg_humidity is not None and avg_pressure is not None:
             forecast = "Weather Forecast:\n"
@@ -45,11 +48,14 @@ class WeatherSimulator:
                 forecast += "The weather conditions are normal."
             print(forecast)
 
-# Instantiate the WeatherSimulator
-simulator = WeatherSimulator()
+# Create an instance of the WeatherSimulator class
+weather_simulator = WeatherSimulator()
 
 # Simulate sensor data for 365 days
-simulator.simulate_weather_data()
+for _ in range(365):
+    weather_simulator.simulate_temperature_sensor()
+    weather_simulator.simulate_humidity_sensor()
+    weather_simulator.simulate_pressure_sensor()
 
 # Generate and print the weather forecast
-simulator.generate_weather_forecast()
+weather_simulator.generate_weather_forecast()
